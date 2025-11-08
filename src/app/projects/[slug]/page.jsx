@@ -35,7 +35,6 @@ export default async function ProjectDetailPage({ params }) {
 
       <Card className="overflow-hidden">
         <div className="flex flex-col md:flex-row">
-          {/* Project Image */}
           <div className="relative w-full md:w-80 aspect-video md:aspect-square flex-shrink-0 overflow-hidden bg-muted/30">
             <Image
               src={project.img}
@@ -47,17 +46,14 @@ export default async function ProjectDetailPage({ params }) {
             />
           </div>
 
-          {/* Project Content */}
           <div className="flex flex-col flex-1 p-6">
             <CardTitle className="text-2xl md:text-3xl mb-4">{project.title}</CardTitle>
 
-            {/* Project Description */}
             <div className="mb-4">
               <h3 className="text-xl font-semibold mb-2">Description</h3>
               <p className="text-muted-foreground leading-relaxed">{project.desc}</p>
             </div>
 
-            {/* Project Keywords/Tags */}
             {project.keywords && project.keywords.length > 0 && (
               <div className="mb-6">
                 <h3 className="text-xl font-semibold mb-3">Technologies</h3>
@@ -71,7 +67,6 @@ export default async function ProjectDetailPage({ params }) {
               </div>
             )}
 
-            {/* Project Link */}
             <div className="mt-auto">
               <Button asChild size="lg">
                 <a href={project.link} target="_blank" rel="noreferrer">

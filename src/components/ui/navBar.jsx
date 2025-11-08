@@ -20,6 +20,12 @@ export default function MyNavBar() {
           </li>
 
           <li>
+            <Link href="/calendar" className="text-sm font-medium transition-colors hover:text-primary">
+              Calendar
+            </Link>
+          </li>
+
+          <li>
             <Link href="/resume" className="text-sm font-medium transition-colors hover:text-primary">
               Resume
             </Link>
