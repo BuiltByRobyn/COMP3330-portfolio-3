@@ -6,17 +6,17 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Clock, Calendar as CalendarIcon, MessageSquare } from 'lucide-react';
 
 const CalWidget = dynamic(() => import('@/components/CalendlyWidget'), {
   ssr: false,
   loading: () => (
     <div className="flex items-center justify-center" style={{ minWidth: '320px', height: '700px' }}>
-      <div className="animate-pulse text-muted-foreground">Loading calendar...</div>
+      <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
     </div>
   ),
 });
@@ -66,40 +66,44 @@ export default function CalendarPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
+    <div className="container mx-auto px-4 py-8 max-w-7xl">
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold mb-4">Schedule a Meeting</h1>
-      </div>
-
-      <div className="text-center mb-4">
-        <h2 className="text-2xl font-semibold text-gray-700">Let's Chat</h2>
-        <p className="text-sm text-muted-foreground mt-2">
-          Choose a time to meet with me remotely.
+        <p className="text-muted-foreground">
+          Choose a quick 30-minute slot or request a custom meeting time
         </p>
+        <p className="text-muted-foreground mt-1">
+          Need more than an hour? Let me know in the request form
+        </p>
+        <div className="border-b-2 border-border pt-8"></div>
       </div>
 
-      <div className="mb-12 max-w-4xl mx-auto">
-        <div className="border-0 shadow-none">
-          <CalWidget url="robyn-downie-g5eqxl/30min" />
+      <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="flex flex-col">
+          <div className="text-center mb-4">
+            <h2 className="text-2xl font-semibold text-gray-700">Quick 30-Min Chat</h2>
+            <p className="text-sm text-muted-foreground mt-2">
+              Choose a time to meet with me remotely.
+            </p>
+          </div>
+          <div className="flex-1">
+            <CalWidget url="robyn-downie-g5eqxl/30min" />
+          </div>
         </div>
-      </div>
 
-      <div className="flex items-center gap-12 mb-12 mt-12">
-        <div className="flex-1 border-t border-gray-300"></div>
-        <div className="text-center">
-          <h2 className="text-2xl font-semibold text-gray-700">Need More Time?</h2>
-          <p className="text-sm text-muted-foreground mt-2">
-            Fill out this form and I'll get back to you to schedule a custom session.
-          </p>
-        </div>
-        <div className="flex-1 border-t border-gray-300"></div>
-      </div>
+        <div className="border-b-2 border-border my-8 lg:hidden"></div>
 
-      <div className="max-w-4xl mx-auto">
-        <Card className="bg-transparent border-0 shadow-none">
-        <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" suppressHydrationWarning>
-            <div className="grid md:grid-cols-2 gap-4" suppressHydrationWarning>
+        <div className="flex flex-col">
+          <div className="text-center mb-4">
+            <h2 className="text-2xl font-semibold text-gray-700">Need More Time?</h2>
+            <p className="text-sm text-muted-foreground mt-2">
+              Fill out this form and I'll get back to you to schedule a custom session.
+            </p>
+          </div>
+          <Card className="bg-transparent border-0 shadow-none flex-1">
+            <CardContent className="p-0">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" suppressHydrationWarning>
+            <div className="grid grid-cols-1 gap-4" suppressHydrationWarning>
               <div className="space-y-2" suppressHydrationWarning>
                 <Label htmlFor="name">Your Name</Label>
                 <Input
@@ -161,14 +165,15 @@ export default function CalendarPage() {
               )}
             </div>
 
-            <div className="flex justify-center">
-              <Button type="submit" disabled={isSubmitting} className="w-full md:w-auto">
+            <div className="flex justify-center lg:justify-start">
+              <Button type="submit" disabled={isSubmitting} className="w-full lg:w-auto">
                 {isSubmitting ? 'Submitting...' : 'Submit Request'}
               </Button>
             </div>
           </form>
         </CardContent>
       </Card>
+        </div>
       </div>
     </div>
   );

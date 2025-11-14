@@ -4,6 +4,7 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import {
@@ -28,14 +29,15 @@ const newProjectSchema = z.object({
 
 export default function NewPage() {
     const [draftKeyword, setDraftKeyword] = useState("");
+    const router = useRouter();
 
     const form = useForm({
         resolver: zodResolver(newProjectSchema),
         defaultValues: {
-            title: "Write your project title here...",
-            description: "Write your project description here...",
-            img: "https://placehold.co/300.png",
-            link: "https://your-project-link.com",
+            title: "",
+            description: "",
+            img: "",
+            link: "",
             keywords: [],
         },
     })
@@ -62,6 +64,10 @@ export default function NewPage() {
                     description: `${values.title} has been added to your portfolio.`,
                 })
                 form.reset()
+
+                setTimeout(() => {
+                    router.push('/projects')
+                }, 1500)
             } else {
                 console.error('Error creating project:', data)
                 toast.error('Error creating project', {
@@ -81,7 +87,7 @@ export default function NewPage() {
         <div className="container mx-auto max-w-2xl">
             <h1 className="text-3xl font-bold mb-6 mt-8">Create New Project</h1>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 m-4">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10 m-4">
                     <FormField
                         control={form.control}
                         name="title"

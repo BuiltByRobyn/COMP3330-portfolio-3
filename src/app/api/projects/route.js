@@ -2,6 +2,7 @@ export async function GET() {
 
      const projects = [
     {
+      slug: "jargon",
       title: "Jargon",
       desc: "A customizable language learning app designed for immigrant tradespeople in BC",
       img: "/jargon_logo.png",
@@ -9,6 +10,7 @@ export async function GET() {
       keywords: ["React", "Node.js", "Education", "Mobile"]
     },
     {
+      slug: "money-monsters",
       title: "Money Monsters",
       desc: "Teach children financial literacy through an engaging chore management platform.",
       img: "/MM.png",
@@ -16,6 +18,7 @@ export async function GET() {
       keywords: ["JavaScript", "Express", "PostgreSQL", "Education"]
     },
     {
+      slug: "figma-user-documentation",
       title: "Figma User Documentation",
       desc: "Comprehensive mkdocs walkthrough for learning the Figma design system.",
       img: "/figma.png",

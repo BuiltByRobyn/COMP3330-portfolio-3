@@ -2,7 +2,6 @@ import Link from "next/link"
 import Image from "next/image"
 import { Card, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { createSlug } from "@/lib/utils"
 
 export default async function AllProjects() {
     const projects = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects`)
@@ -24,9 +23,8 @@ export default async function AllProjects() {
 
         <div className="flex flex-col gap-6">
           {projects.map((project) => {
-            const slug = createSlug(project.title);
             return (
-              <Card key={slug} className="flex flex-col md:flex-row overflow-hidden">
+              <Card key={project.slug} className="flex flex-col md:flex-row overflow-hidden">
                 <div className="relative w-full md:w-64 aspect-video md:aspect-square flex-shrink-0 overflow-hidden bg-muted/30">
                   <Image
                     src={project.img}
@@ -50,7 +48,7 @@ export default async function AllProjects() {
                       </a>
                     </Button>
                     <Button asChild size="sm">
-                      <Link href={`/projects/${slug}`}>Details</Link>
+                      <Link href={`/projects/${project.slug}`}>Details</Link>
                     </Button>
                   </CardFooter>
                 </div>

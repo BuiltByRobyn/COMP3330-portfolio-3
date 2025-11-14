@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
       <body className={`${inter.variable} ${robotoMono.variable} font-sans antialiased`}>
         <MyNavBar />
         {children}
-        <Toaster />
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   )

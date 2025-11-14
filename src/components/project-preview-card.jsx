@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Card, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
@@ -39,7 +40,7 @@ export default async function ProjectPreviewCard({ count = 3 }) {
 
               <CardFooter className="p-0 mt-auto">
                 <Button asChild className="w-full">
-                  <a href={project.link}>View Project</a>
+                  <Link href={`/projects/${project.slug}`}>View Project</Link>
                 </Button>
               </CardFooter>
             </div>

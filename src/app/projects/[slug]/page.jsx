@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { createSlug } from "@/lib/utils";
 
 export default async function ProjectDetailPage({ params }) {
   const { slug } = await params;
@@ -19,7 +18,7 @@ export default async function ProjectDetailPage({ params }) {
 
   const { projects } = await res.json();
 
-  const project = projects.find((p) => createSlug(p.title) === slug);
+  const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
     notFound();
